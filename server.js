@@ -16,6 +16,7 @@ app.use(express.static(__dirname + '/public'));
 	// See your keys here https://dashboard.stripe.com/account/apikeys
 var stripe = require("stripe")("sk_test_aZwMDCGsxrnxJJKiCP1uid2X");
 
+console.log("logging works");
 // Using Express
 app.post("/", function(request, response) {
 
