@@ -11,15 +11,14 @@ app.set('view engine', 'ejs');
 // make express look in the public directory for assets (css/js/img)
 app.use(express.static(__dirname + '/public'));
 
-// set the home page route
-app.post('/', function(req, res) {
+
 	// Set your secret key: remember to change this to your live secret key in production
 	// See your keys here https://dashboard.stripe.com/account/apikeys
 var stripe = require("stripe")("sk_test_aZwMDCGsxrnxJJKiCP1uid2X");
 
 // Using Express
 app.post("https://basicstripe.herokuapp.com/", function(request, response) {
-	 
+
 	var stripeToken = request.body.stripeToken;
 
 	var charge = stripe.charges.create({
@@ -34,8 +33,11 @@ app.post("https://basicstripe.herokuapp.com/", function(request, response) {
 	});
 
   // Do something with event_json
+  console.log(stripeToken);
+  console.log("got dat token");
 
   response.send(200);
+
 });
 
 app.listen(port, function() {
