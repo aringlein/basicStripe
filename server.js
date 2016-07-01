@@ -12,10 +12,30 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 // set the home page route
-app.get('/', function(req, res) {
+app.post('/', function(req, res) {
+	// Set your secret key: remember to change this to your live secret key in production
+	// See your keys here https://dashboard.stripe.com/account/apikeys
+var stripe = require("stripe")("sk_test_aZwMDCGsxrnxJJKiCP1uid2X");
 
-    // ejs render automatically looks in the views folder
-    res.render('index');
+// Using Express
+app.post("https://basicstripe.herokuapp.com/", function(request, response) {
+	 
+	var stripeToken = request.body.stripeToken;
+
+	var charge = stripe.charges.create({
+	  amount: 1000, // amount in cents, again
+	  currency: "usd",
+	  source: stripeToken,
+	  description: "Example charge"
+	}, function(err, charge) {
+	  if (err && err.type === 'StripeCardError') {
+	    // The card has been declined
+	  }
+	});
+
+  // Do something with event_json
+
+  response.send(200);
 });
 
 app.listen(port, function() {
