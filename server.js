@@ -17,7 +17,7 @@ app.use(express.static(__dirname + '/public'));
 var stripe = require("stripe")("sk_test_aZwMDCGsxrnxJJKiCP1uid2X");
 
 // Using Express
-app.post("https://basicstripe.herokuapp.com/", function(request, response) {
+app.post("/", function(request, response) {
 
 	var stripeToken = request.body.stripeToken;
 
