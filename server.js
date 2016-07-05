@@ -1,39 +1,69 @@
 var express = require('express');
 var app = express();
 
-// set the port of our application
-// process.env.PORT lets the port be set by Heroku
 var port = process.env.PORT || 8080;
-
-// set the view engine to ejs
 app.set('view engine', 'ejs');
-
-// make express look in the public directory for assets (css/js/img)
 app.use(express.static(__dirname + '/public'));
 bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
-	// Set your secret key: remember to change this to your live secret key in production
-	// See your keys here https://dashboard.stripe.com/account/apikeys
 var stripe = require("stripe")("sk_test_aZwMDCGsxrnxJJKiCP1uid2X");
 
-console.log("logging works");
-// Using Express
+var Parse = require("parse");
+Parse.initialize("fHRPbh6JQnYVePYz1zL60PYWmErk8cELuYPzCEkd","UJQNqaZip8qqwyUKkrjXJyvjgbwdZYgNZPeNNmCA");
+
 app.post("/", function(request, response) {
 
 	var stripeToken = request.body.stripeToken;
 
-	var charge = stripe.charges.create({
-	  amount: 1000, // amount in cents, again
-	  currency: "usd",
-	  source: stripeToken,
-	  description: "Example charge"
-	}, function(err, charge) {
-	  if (err && err.type === 'StripeCardError') {
-	    // The card has been declined
-	  }
-	});
+	if (stripeToken) {
+
+		var charge = stripe.charges.create({
+		  amount: 1000, // amount in cents, again
+		  currency: "usd",
+		  source: stripeToken,
+		  description: "Example charge"
+
+		}, function(err, charge) {
+		  if (err && err.type === 'StripeCardError') {
+		    // The card has been declined
+		    console.log("card declined");
+
+		  } else if (charge) {
+		  	//get the user who made the charge
+		  	var Purchase = Parse.Object.extend("Purchase");
+		  	purchaseQuery = new Parse.Query(Purchase);
+		  	purchaseQuery.equalTo(tokenId, stripeToken.id);
+		  	purchaseQuery.find({
+		  		success: function(purchases) {
+		  			if (purchases.length > 1) {
+		  				console.log("more than one purchase ?!?");
+		  			}
+		  			if (purchases.length > 0) {
+		  				purchase = purchases[0];
+		  				purchase.set('charged', true);
+		  				purchase.save({
+		  					success: function(purchase) {
+		                      console.log("purchase saved");
+		                    },
+		                    error: function(error) {
+		                      console.log(error);
+		                    }
+		  				});
+		  			}
+		  		},
+		  		error: function(error) {
+		  			console.log(error);
+		  		}
+		  	})
+
+		  } else {
+		  	console.log("something weird happened");
+		  }
+		});
+	} else {
+		console.log("token is undefined");
+	}
 
   // Do something with event_json
   console.log(stripeToken);
