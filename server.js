@@ -79,7 +79,7 @@ app.post("/", function(request, response) {
   {Location: 'http://ovote-dev.parseapp.com/feed'}
 );
 response.end();*/
-	response.send('success');
+	response.send({'access-control-allow-origin': 'success'});
 
 });
 
