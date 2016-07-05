@@ -11,7 +11,7 @@ app.set('view engine', 'ejs');
 // make express look in the public directory for assets (css/js/img)
 app.use(express.static(__dirname + '/public'));
 bodyParser = require('body-parser');
-app.use(bodyParser);
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
 	// Set your secret key: remember to change this to your live secret key in production
