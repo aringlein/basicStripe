@@ -14,9 +14,13 @@ Parse.initialize("fHRPbh6JQnYVePYz1zL60PYWmErk8cELuYPzCEkd","UJQNqaZip8qqwyUKkrj
 
 app.post("/", function(request, response) {
 
+	console.log("got a request");
+
 	var stripeToken = request.body.stripeToken;
 
 	if (stripeToken) {
+
+		console.log("got a token");
 
 		var charge = stripe.charges.create({
 		  amount: 1000, // amount in cents, again
