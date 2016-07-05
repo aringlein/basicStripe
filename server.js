@@ -39,8 +39,10 @@ app.post("/", function(request, response) {
   console.log(stripeToken);
   console.log("got dat token");
 
-  var data = [];
-  response.render('redirect', data);
+  response.writeHead(301,
+  {Location: 'http://ovote-dev.parseapp.com/feed'}
+);
+response.end();
 
 });
 
