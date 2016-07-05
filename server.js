@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 var stripe = require("stripe")("sk_test_aZwMDCGsxrnxJJKiCP1uid2X");
 
-var Parse = require("parse");
+var Parse = require("parse/node");
 Parse.initialize("fHRPbh6JQnYVePYz1zL60PYWmErk8cELuYPzCEkd","UJQNqaZip8qqwyUKkrjXJyvjgbwdZYgNZPeNNmCA");
 
 app.post("/", function(request, response) {
@@ -50,6 +50,8 @@ app.post("/", function(request, response) {
 		                      console.log(error);
 		                    }
 		  				});
+		  			} else {
+		  				console.log("no purchases found");
 		  			}
 		  		},
 		  		error: function(error) {
