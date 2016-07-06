@@ -10,7 +10,7 @@ var port = process.env.PORT || 8080;
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 var stripe = require("stripe")("sk_test_aZwMDCGsxrnxJJKiCP1uid2X");
 
@@ -22,7 +22,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 	console.log("got a request");
 
 	var stripeToken = request.body.stripeToken;
-	console.log(request)
+	//console.log(request)
 	console.log(request.body);
 
 	if (stripeToken) {
