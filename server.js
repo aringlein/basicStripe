@@ -3,7 +3,7 @@ var cors = require('cors');
 var app = express();
 
 var corsOptions = {
-	origin: 'http://ovote-dev.parseapp.com'
+	origin: 'https://ovote-dev.parseapp.com'
 }
 
 var port = process.env.PORT || 8080;
