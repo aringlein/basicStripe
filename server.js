@@ -22,6 +22,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 	console.log("got a request");
 
 	var tokenId = request.body.tokenId;
+	console.log(request.body);
 
 	if (tokenId) {
 
@@ -75,7 +76,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 		  }
 		});
 	} else {
-		console.log("token is undefined");
+		console.log("tokenId is undefined");
 	}
 
 	response.send('success');
