@@ -23,7 +23,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 
 	var stripeToken = request.body.stripeToken;
 	//console.log(request)
-	console.log(request.body);
+	console.log(request.body.stripeToken);
 
 	if (stripeToken) {
 
