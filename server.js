@@ -21,18 +21,16 @@ app.post("/", cors(corsOptions), function(request, response) {
 
 	console.log("got a request");
 
-	var stripeToken = request.body.stripeToken;
-	//console.log(request)
-	console.log(request.body.stripeToken);
+	var tokenId = request.body.tokenId;
 
-	if (stripeToken) {
+	if (tokenId) {
 
 		console.log("got a token");
 
 		var charge = stripe.charges.create({
 		  amount: 1000, // amount in cents, again
 		  currency: "usd",
-		  source: stripeToken,
+		  source: tokenId,
 		  description: "Example charge"
 
 		}, function(err, charge) {
@@ -44,7 +42,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 		  	//get the user who made the charge
 		  	var Purchase = Parse.Object.extend("Purchase");
 		  	purchaseQuery = new Parse.Query(Purchase);
-		  	purchaseQuery.equalTo(tokenId, stripeToken.id);
+		  	purchaseQuery.equalTo('tokenId', tokenId);
 		  	purchaseQuery.find({
 		  		success: function(purchases) {
 		  			if (purchases.length > 1) {
