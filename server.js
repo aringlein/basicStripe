@@ -2,6 +2,10 @@ var express = require('express');
 var cors = require('cors');
 var app = express();
 
+var corsOptions = {
+	origin: 'http://basicstripe.parseapp.com'
+}
+
 var port = process.env.PORT || 8080;
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
@@ -13,7 +17,7 @@ var stripe = require("stripe")("sk_test_aZwMDCGsxrnxJJKiCP1uid2X");
 var Parse = require("parse/node");
 Parse.initialize("fHRPbh6JQnYVePYz1zL60PYWmErk8cELuYPzCEkd","UJQNqaZip8qqwyUKkrjXJyvjgbwdZYgNZPeNNmCA");
 
-app.post("/", function(request, response) {
+app.post("/", cors(corsOptions), function(request, response) {
 
 	console.log("got a request");
 
