@@ -76,15 +76,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 		console.log("token is undefined");
 	}
 
-  // Do something with event_json
-  console.log(stripeToken);
-  console.log("got dat token");
-
-  /*response.writeHead(301,
-  {Location: 'http://ovote-dev.parseapp.com/feed'}
-);
-response.end();*/
-	response.send({'access-control-allow-origin': 'success'});
+	response.send('success');
 
 });
 
