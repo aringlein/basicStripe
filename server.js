@@ -72,8 +72,8 @@ app.post("/", cors(corsOptions), function(request, response) {
 
 		  } else {
 		  	console.log("something weird happened");
-		  	console.log("error: "+ error);
-		  	console.log("erro type: " error.type);
+		  	console.log("error: "+ err);
+		  	console.log("error type: "+ err.type);
 		  }
 		});
 	} else {
