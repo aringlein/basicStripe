@@ -29,7 +29,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 		console.log("got a token");
 
 		var charge = stripe.charges.create({
-		  amount: 50, // amount in cents, again
+		  amount: 49, // amount in cents, again
 		  currency: "usd",
 		  source: tokenId,
 		  description: "1 Excel Upload"
