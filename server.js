@@ -12,7 +12,7 @@ app.use(express.static(__dirname + '/public'));
 bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var stripe = require("stripe")("sk_test_aZwMDCGsxrnxJJKiCP1uid2X");
+var stripe = require("stripe")("sk_live_VDCRR9PPUZfzPTnXaCp7XfbN");
 
 var Parse = require("parse/node");
 Parse.initialize("fHRPbh6JQnYVePYz1zL60PYWmErk8cELuYPzCEkd","UJQNqaZip8qqwyUKkrjXJyvjgbwdZYgNZPeNNmCA");
@@ -29,10 +29,10 @@ app.post("/", cors(corsOptions), function(request, response) {
 		console.log("got a token");
 
 		var charge = stripe.charges.create({
-		  amount: 1000, // amount in cents, again
+		  amount: 1, // amount in cents, again
 		  currency: "usd",
 		  source: tokenId,
-		  description: "Example charge"
+		  description: "1 Excel Upload"
 
 		}, function(err, charge) {
 		  if (err && err.type === 'StripeCardError') {
@@ -55,31 +55,35 @@ app.post("/", cors(corsOptions), function(request, response) {
 		  				purchase.save({
 		  					success: function(purchase) {
 		                      console.log("purchase saved");
+		                      response.send('success');
 		                    },
 		                    error: function(error) {
 		                      console.log(error);
+		                      responde.send('nosave');
 		                    }
 		  				});
 		  			} else {
-		  				console.log("no purchases found");
+		  				response.send("nopurchase");
 		  			}
 		  		},
 		  		error: function(error) {
 		  			console.log(error);
+		  			response.send('error');
 		  		}
 		  	})
 
 		  } else {
-		  	console.log("something weird happened");
 		  	console.log("error: "+ err);
 		  	console.log("error type: "+ err.type);
+		  	response.send('error');
 		  }
 		});
 	} else {
 		console.log("tokenId is undefined");
+		response.send("notoken");
 	}
 
-	response.send('success');
+	
 
 });
 
