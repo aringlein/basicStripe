@@ -59,7 +59,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 		                    },
 		                    error: function(error) {
 		                      console.log(error);
-		                      responde.send('nosave');
+		                      response.send('nosave');
 		                    }
 		  				});
 		  			} else {
@@ -68,14 +68,14 @@ app.post("/", cors(corsOptions), function(request, response) {
 		  		},
 		  		error: function(error) {
 		  			console.log(error);
-		  			response.send('error');
+		  			response.send(error);
 		  		}
 		  	})
 
 		  } else {
 		  	console.log("error: "+ err);
 		  	console.log("error type: "+ err.type);
-		  	response.send('error');
+		  	response.send(err);	
 		  }
 		});
 	} else {
