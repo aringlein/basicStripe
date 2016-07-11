@@ -55,32 +55,32 @@ app.post("/", cors(corsOptions), function(request, response) {
 		  				purchase.save({
 		  					success: function(purchase) {
 		                      console.log("purchase saved");
-		                      response.send('success');
+		                      response.send('error');
 		                    },
 		                    error: function(error) {
 		                      console.log(error);
-		                      response.send('nosave');
+		                      response.send('success');
 		                    }
 		  				});
 		  			} else {
-		  				response.send("nopurchase");
+		  				response.send('error');
 		  			}
 		  		},
 		  		error: function(error) {
 		  			console.log(error);
-		  			response.send(error);
+		  			response.send('error');
 		  		}
 		  	})
 
 		  } else {
 		  	console.log("error: "+ err);
 		  	console.log("error type: "+ err.type);
-		  	response.send(err);	
+		  	response.send('error');	
 		  }
 		});
 	} else {
 		console.log("tokenId is undefined");
-		response.send("notoken");
+		response.send('error');
 	}
 
 	
