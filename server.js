@@ -47,7 +47,8 @@ app.post("/", cors(corsOptions), function(request, response) {
 		  	purchaseQuery.find({
 		  		success: function(purchases) {
 		  			if (purchases.length > 1) {
-		  				console.log("more than one purchase ?!?");
+		  				console.log("more than one purchase");
+		  				createError("Found more than one purchase for token: " + tokenId, purchases[0].get('user'), purchases[0].get('group'));   
 		  			}
 		  			if (purchases.length > 0) {
 		  				purchase = purchases[0];
@@ -55,37 +56,48 @@ app.post("/", cors(corsOptions), function(request, response) {
 		  				purchase.save({
 		  					success: function(purchase) {
 		                      console.log("purchase saved");
-		                      response.send('error');
 		                    },
 		                    error: function(error) {
 		                      console.log(error);
-		                      response.send('success');
+		                      createError("Error saving purchase", purchases[0].get('user'), purchases[0].get('group'));
 		                    }
 		  				});
 		  			} else {
-		  				response.send('error');
+		  				createError("Found 0 purchases for token: "+ tokenId, undefined, undefined);
 		  			}
 		  		},
 		  		error: function(error) {
 		  			console.log(error);
-		  			response.send('error');
+		  			createError("Error retrieving purchases: " + error, undefined, undefined);
 		  		}
-		  	})
+		  	});
+		  	//send success since charge went through
+		  	response.send('success');
 
 		  } else {
-		  	console.log("error: "+ err);
-		  	console.log("error type: "+ err.type);
+		  	createError("BasicStripe error: "+ err, undefined undefined);
 		  	response.send('error');	
 		  }
 		});
 	} else {
-		console.log("tokenId is undefined");
+		createError("BasicStripe: tokenId is undefined", undefined, undefined);
 		response.send('error');
 	}
 
 	
 
 });
+
+//tries to save an error message to the database
+var createError = function(message, user, group) {
+	error = new Error ({
+		message: message,
+		user: user,
+		group: group
+	});
+	error.save();
+	console.log(message);
+}
 
 app.listen(port, function() {
     console.log('Our app is running on http://localhost:' + port);
