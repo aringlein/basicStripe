@@ -19,9 +19,9 @@ Parse.initialize("fHRPbh6JQnYVePYz1zL60PYWmErk8cELuYPzCEkd","UJQNqaZip8qqwyUKkrj
 
 app.post("/", cors(corsOptions), function(request, response) {
 
-	response.send('success');
+	
 
-	/*console.log("got a request");
+	console.log("got a request");
 
 	var tokenId = request.body.tokenId;
 	var userId = request.body.userId;
@@ -54,7 +54,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 		  })
 		});
 
-		var charge = stripe.charges.create({
+		/*var charge = stripe.charges.create({
 		  amount: 50, // amount in cents, again
 		  currency: "usd",
 		  source: tokenId,
@@ -104,11 +104,11 @@ app.post("/", cors(corsOptions), function(request, response) {
 		  	createError("BasicStripe error: "+ err, undefined undefined);
 		  	response.send('error');	
 		  }
-		});
+		});*/
 	} else {
 		createError("BasicStripe: tokenId is undefined", undefined, undefined);
 		response.send('error');
-	}*/
+	}
 
 	
 
