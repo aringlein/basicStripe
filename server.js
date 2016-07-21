@@ -44,9 +44,10 @@ app.post("/", cors(corsOptions), function(request, response) {
 		  	success: function(user) {
 		  		user.set('customerId', customer.id);
 		  		user.save();
+		  		response.send('success');
 		  	},
 		  	error: function(error) {
-
+		  		response.send('error');
 		  	}
 		  })
 		});
