@@ -39,7 +39,16 @@ app.post("/", cors(corsOptions), function(request, response) {
 		    customer: customer.id
 		  });
 		}).then(function(charge) {
-		  // YOUR CODE: Save the customer ID and other info in a database for later!
+		  userQuery = new Parse.Query(Parse.User);
+		  userQuery.get(userId, {
+		  	success: function(user) {
+		  		userQuery.set('customerId', customer.id);
+		  		userQuery.save();
+		  	},
+		  	error: function(error) {
+
+		  	}
+		  })
 		});
 
 		/*var charge = stripe.charges.create({
