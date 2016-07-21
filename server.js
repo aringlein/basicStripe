@@ -17,18 +17,32 @@ var stripe = require("stripe")("sk_test_aZwMDCGsxrnxJJKiCP1uid2X");
 var Parse = require("parse/node");
 Parse.initialize("fHRPbh6JQnYVePYz1zL60PYWmErk8cELuYPzCEkd","UJQNqaZip8qqwyUKkrjXJyvjgbwdZYgNZPeNNmCA");
 
-app.post("/charge", cors(corsOptions), function(request, response) {
+app.post("/", cors(corsOptions), function(request, response) {
 
 	console.log("got a request");
 
 	var tokenId = request.body.tokenId;
+	var userId = request.body.userId;
 	console.log(request.body);
 
 	if (tokenId) {
 
 		console.log("got a token");
 
-		var charge = stripe.charges.create({
+		stripe.customers.create({
+		  source: tokenId,
+		  description: userId
+		}).then(function(customer) {
+		  return stripe.charges.create({
+		    amount: 2000, // amount in cents, again
+		    currency: "usd",
+		    customer: customer.id
+		  });
+		}).then(function(charge) {
+		  // YOUR CODE: Save the customer ID and other info in a database for later!
+		});
+
+		/*var charge = stripe.charges.create({
 		  amount: 50, // amount in cents, again
 		  currency: "usd",
 		  source: tokenId,
@@ -78,7 +92,7 @@ app.post("/charge", cors(corsOptions), function(request, response) {
 		  	createError("BasicStripe error: "+ err, undefined undefined);
 		  	response.send('error');	
 		  }
-		});
+		});*/
 	} else {
 		createError("BasicStripe: tokenId is undefined", undefined, undefined);
 		response.send('error');
