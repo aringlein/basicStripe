@@ -17,7 +17,7 @@ var stripe = require("stripe")("sk_test_aZwMDCGsxrnxJJKiCP1uid2X");
 var Parse = require("parse/node");
 Parse.initialize("fHRPbh6JQnYVePYz1zL60PYWmErk8cELuYPzCEkd","UJQNqaZip8qqwyUKkrjXJyvjgbwdZYgNZPeNNmCA");
 
-app.post("/", cors(corsOptions), function(request, response) {
+app.post("/charge", cors(corsOptions), function(request, response) {
 
 	console.log("got a request");
 
