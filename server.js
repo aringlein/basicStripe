@@ -12,7 +12,7 @@ app.use(express.static(__dirname + '/public'));
 bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var stripe = require("stripe")("sk_live_VDCRR9PPUZfzPTnXaCp7XfbN");
+var stripe = require("stripe")("sk_test_aZwMDCGsxrnxJJKiCP1uid2X");
 
 var Parse = require("parse/node");
 Parse.initialize("fHRPbh6JQnYVePYz1zL60PYWmErk8cELuYPzCEkd","UJQNqaZip8qqwyUKkrjXJyvjgbwdZYgNZPeNNmCA");
