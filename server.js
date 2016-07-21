@@ -101,7 +101,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 		  	response.send('success');
 
 		  } else {
-		  	createError("BasicStripe error: "+ err, undefined undefined);
+		  	createError("BasicStripe error: "+ err, undefined, undefined);
 		  	response.send('error');	
 		  }
 		});
@@ -109,8 +109,6 @@ app.post("/", cors(corsOptions), function(request, response) {
 		createError("BasicStripe: tokenId is undefined", undefined, undefined);
 		response.send('error');
 	}
-
-	
 
 });
 
