@@ -45,6 +45,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 					userQuery.get(userId, {
 						success: function(user) {
 							user.set('customerId', customer.id);
+							user.set('newcol', true);
 							user.save();
 							console.log(customer);
 							response.send('success');
