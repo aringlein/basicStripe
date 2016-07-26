@@ -46,9 +46,14 @@ app.post("/", cors(corsOptions), function(request, response) {
 						success: function(user) {
 							user.set('customerId', customer.id.toString());
 							user.set('newcol', true);
-							user.save();
-							console.log(customer);
-							response.send('success');
+							user.save(null, {
+								success: function(fuckery) {
+									response.send('success');
+								}, 
+								error: function(increasedFuckery) {
+									response.send('error');
+								}
+							});
 							
 						},
 						error: function(error) {
