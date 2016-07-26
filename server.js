@@ -43,7 +43,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 					userQuery = new Parse.Query(Parse.User);
 					userQuery.get(userId, {
 						success: function(user) {
-							user.set('customerId', customer.id);
+							/*user.set('customerId', customer.id);
 							user.save({
 								success: function (user) {
 									console.log(customer);
@@ -52,7 +52,8 @@ app.post("/", cors(corsOptions), function(request, response) {
 								error: function (error) {
 									response.send('error');
 								}
-							})
+							})*/
+							response.send('success');
 							
 						},
 						error: function(error) {
