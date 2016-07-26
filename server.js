@@ -25,26 +25,47 @@ app.post("/", cors(corsOptions), function(request, response) {
 
 	var tokenId = request.body.tokenId;
 	var userId = request.body.userId;
+	var subscription = request.body.subscription;
 	console.log(request.body);
 
 	if (tokenId) {
 
 		console.log("got a token");
 
-		stripe.customers.create({
-		  source: tokenId,
-		  description: userId
-		}, function(err, customer) {
-			if (customer) {
-
+		if (subscription) {
+				stripe.customers.create({
+				source: tokenId,
+				plan: "planMonthly",
+				description: userId
+			}, function(err, customer) {
+				if (customer) {
+					
 				
-				response.send('success');
+					response.send('success');
 
-				
-			} else {
-				response.send('error');
-			}
-		});
+					
+				} else {
+					response.send('error');
+				}
+			});
+		} else {
+			var charge = stripe.charges.create({
+			  amount: 50, // amount in cents, again
+			  currency: "usd",
+			  source: tokenId,
+			  description: "1 Excel Upload"
+
+			}, function(err, charge) {
+			  if (err && err.type === 'StripeCardError') {
+			    // The card has been declined
+			    console.log("card declined");
+
+			  } else if (charge) {
+			  	response.send('success');
+			  }
+			});
+		}
+		
 
 		/*
 
