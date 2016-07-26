@@ -54,7 +54,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 								error: function (error) {
 									response.send('error');
 								}
-							})*/
+							})
 							console.log("yes, yes, yes");
 							console.log(user);
 							response.send('success');
