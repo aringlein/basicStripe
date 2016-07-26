@@ -37,33 +37,8 @@ app.post("/", cors(corsOptions), function(request, response) {
 		}, function(err, customer) {
 			if (customer) {
 
-				var charge = stripe.charges.create({
-				amount: 50, // amount in cents, again
-				currency: "usd",
-				source: tokenId,
-				description: "1 Excel Upload"
-
-				}, function(err, charge) {
-				  if (err && err.type === 'StripeCardError') {
-				    // The card has been declined
-				    console.log("card declined");
-				    response.send('error');
-
-				  } else if (charge) {
-				  	userQuery = new Parse.Query(Parse.User);
-				    userQuery.get(userId, {
-					  	success: function(user) {
-					  		user.set('customerId', customer.id);
-					  		user.save();
-					  		response.send('success');
-					  	},
-					  	error: function(error) {
-					  		response.send('error');
-					  	}
-				  	});
-				  }
-				  	
-				});
+				
+				response.send('success');
 
 				
 			} else {
