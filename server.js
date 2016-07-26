@@ -44,7 +44,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 					userQuery = new Parse.Query(Parse.User);
 					userQuery.get(userId, {
 						success: function(user) {
-							user.set('customerId', customer.id);
+							user.set('customerId', customer.id.toString());
 							user.set('newcol', true);
 							user.save();
 							console.log(customer);
