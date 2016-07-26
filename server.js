@@ -40,7 +40,8 @@ app.post("/", cors(corsOptions), function(request, response) {
 			}, function(err, customer) {
 				if (customer) {
 					
-				
+					console.log(customer);
+					
 					response.send('success');
 
 					
