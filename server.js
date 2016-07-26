@@ -3,7 +3,7 @@ var cors = require('cors');
 var app = express();
 
 var corsOptions = {
-	origin: 'https://ovote-dev.parseapp.com'
+	origin: 'http://ovote-server.herokuapp.com/'
 }
 
 var port = process.env.PORT || 8080;
@@ -31,7 +31,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 
 		console.log("got a token");
 
-		/*stripe.customers.create({
+		stripe.customers.create({
 		  source: tokenId,
 		  description: userId
 		}).then(function(customer) {
@@ -52,7 +52,8 @@ app.post("/", cors(corsOptions), function(request, response) {
 		  		response.send('error');
 		  	}
 		  });
-		});*/
+		});
+		/*
 
 		var charge = stripe.charges.create({
 		  amount: 50, // amount in cents, again
@@ -104,7 +105,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 		  	createError("BasicStripe error: "+ err, undefined, undefined);
 		  	response.send('error');	
 		  }
-		});
+		});*/
 	} else {
 		createError("BasicStripe: tokenId is undefined", undefined, undefined);
 		response.send('error');
