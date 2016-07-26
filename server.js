@@ -51,7 +51,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 									response.send('success');
 								}, 
 								error: function(increasedFuckery) {
-									response.send('error');
+									response.send('cantsave');
 								}
 							});
 							
