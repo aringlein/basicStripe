@@ -43,8 +43,17 @@ app.post("/", cors(corsOptions), function(request, response) {
 					userQuery = new Parse.Query(Parse.User);
 					userQuery.get(userId, {
 						success: function(user) {
-							console.log(customer);
-							response.send('success');
+							user.set('customerId', customer.id);
+							user.save({
+								success: function (user) {
+									console.log(customer);
+									response.send('success');
+								},
+								error: function (error) {
+									response.send('error');
+								}
+							})
+							
 						},
 						error: function(error) {
 							response.send('error');
