@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var stripe = require("stripe")("sk_test_aZwMDCGsxrnxJJKiCP1uid2X");
 
 var Parse = require("parse/node");
+
 Parse.initialize("fHRPbh6JQnYVePYz1zL60PYWmErk8cELuYPzCEkd","UJQNqaZip8qqwyUKkrjXJyvjgbwdZYgNZPeNNmCA");
 
 app.post("/", cors(corsOptions), function(request, response) {
@@ -41,9 +42,10 @@ app.post("/", cors(corsOptions), function(request, response) {
 				if (customer) {
 
 					userQuery = new Parse.Query(Parse.User);
-					userQuery.get(userId, {
+					userQuery.equalTo('objectId', userId);
+					userQuery.first({
 						success: function(user) {
-							/*user.set('customerId', customer.id);
+							user.set('customerId', customer.id);
 							user.save({
 								success: function (user) {
 									console.log(customer);
