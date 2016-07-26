@@ -39,10 +39,19 @@ app.post("/", cors(corsOptions), function(request, response) {
 				description: userId
 			}, function(err, customer) {
 				if (customer) {
+
+					userQuery = new Parse.Query(Parse.User);
+					userQuery.get(userId, {
+						success: function(user) {
+							console.log(customer);
+							response.send('success');
+						},
+						error: function(error) {
+							response.send('error');
+						}
+					});
 					
-					console.log(customer);
 					
-					response.send('success');
 
 					
 				} else {
