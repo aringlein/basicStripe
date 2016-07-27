@@ -18,8 +18,9 @@ var Parse = require("parse/node");
 
 Parse.initialize("fHRPbh6JQnYVePYz1zL60PYWmErk8cELuYPzCEkd","UJQNqaZip8qqwyUKkrjXJyvjgbwdZYgNZPeNNmCA");
 
+app.use(express.static(__dirname+ '/public'));
 app.get("/gorgeousDoc", function(request, response) {
-	response.sendFile("/gorgeousDoc/index.html");
+	response.sendFile(__dirname + '/index.html');
 })
 
 app.post("/", cors(corsOptions), function(request, response) {
