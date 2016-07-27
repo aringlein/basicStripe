@@ -18,6 +18,7 @@ var Parse = require("parse/node");
 
 Parse.initialize("fHRPbh6JQnYVePYz1zL60PYWmErk8cELuYPzCEkd","UJQNqaZip8qqwyUKkrjXJyvjgbwdZYgNZPeNNmCA");
 
+//gorgeous doc stuff, remove later
 app.use(express.static(__dirname+ '/public'));
 app.get("/gorgeousDoc", function(request, response) {
 	response.sendFile(__dirname + '/index.html');
@@ -46,26 +47,43 @@ app.post("/", cors(corsOptions), function(request, response) {
 			}, function(err, customer) {
 				if (customer) {
 
-					userQuery = new Parse.Query(Parse.User);
-					userQuery.get(userId, {
-						success: function(user) {
-							user.set('customerId', customer.id.toString());
-							user.set('newcol', true);
-							user.save(null, {
-								success: function(fuckery) {
-									response.send('success');
-								}, 
-								error: function(increasedFuckery) {
-									console.log(increasedFuckery);
-									response.send('cantsave');
-								}
-							});
-							
-						},
-						error: function(error) {
-							response.send('error');
-						}
-					});
+					//get the user who made the charge
+				  	var Purchase = Parse.Object.extend("Purchase");
+				  	purchaseQuery = new Parse.Query(Purchase);
+				  	purchaseQuery.equalTo('tokenId', tokenId);
+				  	purchaseQuery.find({
+				  		success: function(purchases) {
+				  			if (purchases.length > 1) {
+				  				console.log("more than one purchase");
+				  				createError("Found more than one purchase for token: " + tokenId, purchases[0].get('user'), purchases[0].get('group'));   
+				  			}
+				  			if (purchases.length > 0) {
+				  				purchase = purchases[0];
+				  				purchase.set('charged', true);
+				  				purchase.set('customer', customer.id);
+				  				purchase.set('subscription', true);
+				  				purchase.save({
+				  					success: function(purchase) {
+				                      console.log("purchase saved");
+				                      response.send('success');
+				                    },
+				                    error: function(error) {
+				                      console.log(error);
+				                      createError("Error saving purchase", purchases[0].get('user'), purchases[0].get('group'));
+				                      response.send('error');
+				                      //very bad
+				                    }
+				  				});
+				  			} else {
+				  				createError("Found 0 purchases for token: "+ tokenId, undefined, undefined);
+				  				response.send('error') //very bad
+				  			}
+				  		},
+				  		error: function(error) {
+				  			console.log(error);
+				  			createError("Error retrieving purchases: " + error, undefined, undefined);
+				  		}
+				  	});
 					
 					
 
@@ -75,6 +93,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 				}
 			});
 		} else {
+			//basic charge
 			var charge = stripe.charges.create({
 			  amount: 50, // amount in cents, again
 			  currency: "usd",
