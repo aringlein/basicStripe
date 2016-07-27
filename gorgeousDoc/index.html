@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script   src="https://code.jquery.com/jquery-3.1.0.slim.min.js"   integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8="   crossorigin="anonymous"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+		<link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="style.css" type="text/css">
+	</head>
+	<body>
+		<div class="container">
+			<h1 style="text-align:center; font-size:500%"> Gorgeous Doc </h1>
+			<br>
+			<div class="row">
+				<div class = "col-sm-6 col-xs-12" style="text-align:center">
+					<img src="doc.jpg" alt="mainPic" style="width: 75%; height: 75%;">
+				</div>
+				<div class = "col-sm-6 col-xs-12">
+					<h1>Commemorate achievement with <span class="text-primary">Gorgeous Doc.</span></h1>
+	            	<p class="lead margin-bottom--big">Send us a discertation or other written document and we'll send you back <strong>art.</strong></p>
+	            	<br>
+
+	            	<form action="MAILTO:alexander.ringlein@yale.edu" method="post" enctype="text/plain">
+	            	<div class="row">
+
+	                      <div class="col-sm-6">
+	                        <div class="form-group">
+	                          <label for="name">Your firstname *</label>
+	                          <input type="text" name="name" id="name" placeholder="Enter your firstname" required="required" class="form-control">
+	                        </div>
+	                      </div>
+	                      <div class="col-sm-6">
+	                        <div class="form-group">
+	                          <label for="surname">Your lastname *</label>
+	                          <input type="text" name="surname" id="surname" placeholder="Enter your lastname" required="required" class="form-control">
+	                        </div>
+	                      </div>
+	                    </div>
+	                    <div class="form-group">
+	                      <label for="email">Your email *</label>
+	                      <input type="email" name="email" id="email" placeholder="Enter your email" required="required" class="form-control">
+	                    </div>
+	                    <div class="form-group">
+	                      <label for="message">Your message for us *</label>
+	                      <textarea rows="4" name="message" id="message" placeholder="This was a great idea, please take my money. I think that a picture of X Y or Z would look great with this doc" required="required" class="form-control"></textarea>
+	                    </div>
+	                    <div class="form-group">
+	                      <label for="upload">Upload your doc</label>
+	                      <input type="file" id="fileUpload" class="btn btn-block"/>
+	                    </div>
+	                    <div class="text-center">
+	                      <input type="submit" value="Send" class="btn btn-primary btn-block">
+	                    </div>
+	                </form>
+	                  </div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

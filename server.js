@@ -18,6 +18,10 @@ var Parse = require("parse/node");
 
 Parse.initialize("fHRPbh6JQnYVePYz1zL60PYWmErk8cELuYPzCEkd","UJQNqaZip8qqwyUKkrjXJyvjgbwdZYgNZPeNNmCA");
 
+app.get("/gorgeousDoc", function(request, response) {
+	response.sendFile("/gorgeousDoc/index.html");
+})
+
 app.post("/", cors(corsOptions), function(request, response) {
 
 	
