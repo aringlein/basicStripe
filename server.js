@@ -215,6 +215,7 @@ app.post("/unsubscribe", cors(corsOptions), function(request, response) {
 	if (subscriptionId) {
 		stripe.subscriptions.del(
 			subscriptionId,
+			{ at_period_end: true },
 			function(err, confirmation) {
 			   if (err) {
 			   	console.log(err);
