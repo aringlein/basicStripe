@@ -3,7 +3,7 @@ var cors = require('cors');
 var app = express();
 
 var corsOptions = {
-	origin: 'https://ovote-dev.parseapp.com'
+	origin: 'https://ovote.parseapp.com'
 }
 
 var port = process.env.PORT || 8080;
@@ -12,11 +12,11 @@ app.use(express.static(__dirname + '/public'));
 bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var stripe = require("stripe")("sk_test_aZwMDCGsxrnxJJKiCP1uid2X");
+var stripe = require("stripe")("sk_live_VDCRR9PPUZfzPTnXaCp7XfbN");
 
 var Parse = require("parse/node");
 
-Parse.initialize("fHRPbh6JQnYVePYz1zL60PYWmErk8cELuYPzCEkd","UJQNqaZip8qqwyUKkrjXJyvjgbwdZYgNZPeNNmCA");
+Parse.initialize("K1LHReBWbmi9HeesHsU1fGLviYgmFNur0YNzBTjJ","Kf6nyUpJbInyNv6HvvlkxBqGQx58qBG148oebkt7");
 
 //gorgeous doc stuff, remove later
 app.use(express.static(__dirname+ '/public'));
@@ -42,7 +42,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 		if (subscription) {
 				stripe.customers.create({
 				source: tokenId,
-				plan: "planMonthly",
+				plan: "planMonthlyCheap",
 				description: userId
 			}, function(err, customer) {
 				if (customer) {
