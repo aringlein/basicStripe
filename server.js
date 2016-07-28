@@ -211,6 +211,7 @@ app.post("/unsubscribe", cors(corsOptions), function(request, response) {
 
 	console.log("got a request to unsubscribe");
 	var subscriptionId = request.body.subscriptionId;
+	console.log("sub id" + subscriptionId);
 	if (subscriptionId) {
 		stripe.subscriptions.del(
 			subscriptionId,
