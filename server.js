@@ -206,6 +206,24 @@ app.post("/", cors(corsOptions), function(request, response) {
 
 });
 
+app.post("/unsubscribe", cors(corsOptions), function(request, response) {
+
+	console.log("got a request to unsubscribe");
+	var subscriptionId = request.body.subscriptionId;
+	if (subscriptionId) {
+		stripe.subscriptions.del(
+			subscriptionId,
+			function(err, confirmation) {
+			   if (err) {
+			   	response.send('error');
+			   } else {
+			   	response.send('success');
+			   }
+			}
+		);
+	}
+});
+
 //tries to save an error message to the database
 var createError = function(message, user, group) {
 	error = new Error ({
