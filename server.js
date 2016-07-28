@@ -216,6 +216,7 @@ app.post("/unsubscribe", cors(corsOptions), function(request, response) {
 			subscriptionId,
 			function(err, confirmation) {
 			   if (err) {
+			   	console.log(err);
 			   	response.send('error');
 			   } else {
 			   	response.send('success');
