@@ -63,6 +63,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 				  				purchase.set('customer', customer.id);
 				  				purchase.set('subscriptionId', customer.subscriptions.data[0].id);
 				  				purchase.set('subscription', true);
+				  				purchase.set('enabled', true);
 				  				purchase.save({
 				  					success: function(purchase) {
 				                      console.log("purchase saved");
