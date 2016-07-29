@@ -33,6 +33,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 	var tokenId = request.body.tokenId;
 	var userId = request.body.userId;
 	var subscription = request.body.subscription;
+	var email = request.body.email;
 	console.log(request.body);
 
 	if (tokenId) {
@@ -42,6 +43,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 		if (subscription) {
 				stripe.customers.create({
 				source: tokenId,
+				email: email,
 				plan: "planMonthlyCheap",
 				description: userId
 			}, function(err, customer) {
