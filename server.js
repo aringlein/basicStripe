@@ -20,7 +20,7 @@ Parse.initialize("K1LHReBWbmi9HeesHsU1fGLviYgmFNur0YNzBTjJ","Kf6nyUpJbInyNv6Hvvl
 
 //gorgeous doc stuff, remove later
 app.use(express.static(__dirname+ '/public'));
-app.get("/gorgeousDoc", function(request, response) {
+app.get("/", function(request, response) {
 	response.sendFile(__dirname + '/index.html');
 })
 
