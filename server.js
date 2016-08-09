@@ -44,7 +44,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 				stripe.customers.create({
 				source: tokenId,
 				email: email,
-				plan: "planMonthlyCheap",
+				plan: "planMonthly",
 				description: userId
 			}, function(err, customer) {
 				if (customer) {
@@ -99,7 +99,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 		} else {
 			//basic charge
 			var charge = stripe.charges.create({
-			  amount: 50, // amount in cents, again
+			  amount: 2000, // amount in cents, again
 			  currency: "usd",
 			  source: tokenId,
 			  description: "1 Excel Upload"
