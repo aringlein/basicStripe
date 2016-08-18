@@ -68,7 +68,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 			stripe.customers.create({
 				source: tokenId,
 				email: email,
-				plan: "planMonthly",
+				plan: "planMonthlyCheap",
 				description: userId,
 				coupon: coupon
 			}, function(err, customer) {
@@ -172,61 +172,6 @@ app.post("/", cors(corsOptions), function(request, response) {
 				}
 			});
 		}
-		
-
-		/*
-
-		var charge = stripe.charges.create({
-		  amount: 50, // amount in cents, again
-		  currency: "usd",
-		  source: tokenId,
-		  description: "1 Excel Upload"
-
-		}, function(err, charge) {
-		  if (err && err.type === 'StripeCardError') {
-		    // The card has been declined
-		    console.log("card declined");
-
-		  } else if (charge) {
-		  	//get the user who made the charge
-		  	var Purchase = Parse.Object.extend("Purchase");
-		  	purchaseQuery = new Parse.Query(Purchase);
-		  	purchaseQuery.equalTo('tokenId', tokenId);
-		  	purchaseQuery.find({
-		  		success: function(purchases) {
-		  			if (purchases.length > 1) {
-		  				console.log("more than one purchase");
-		  				createError("Found more than one purchase for token: " + tokenId, purchases[0].get('user'), purchases[0].get('group'));   
-		  			}
-		  			if (purchases.length > 0) {
-		  				purchase = purchases[0];
-		  				purchase.set('charged', true);
-		  				purchase.save({
-		  					success: function(purchase) {
-		                      console.log("purchase saved");
-		                    },
-		                    error: function(error) {
-		                      console.log(error);
-		                      createError("Error saving purchase", purchases[0].get('user'), purchases[0].get('group'));
-		                    }
-		  				});
-		  			} else {
-		  				createError("Found 0 purchases for token: "+ tokenId, undefined, undefined);
-		  			}
-		  		},
-		  		error: function(error) {
-		  			console.log(error);
-		  			createError("Error retrieving purchases: " + error, undefined, undefined);
-		  		}
-		  	});
-		  	//send success since charge went through
-		  	response.send('success');
-
-		  } else {
-		  	createError("BasicStripe error: "+ err, undefined, undefined);
-		  	response.send('error');	
-		  }
-		});*/
 	} else {
 		createError("BasicStripe: tokenId is undefined", undefined, undefined);
 		response.send('error');
