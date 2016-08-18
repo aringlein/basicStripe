@@ -27,23 +27,6 @@ const freeCoupon = "professorCheap";
 app.use(express.static(__dirname+ '/public'));
 app.get("/", function(request, response) {
 	response.sendFile(__dirname + '/index.html');
-})
-
-app.post("/codeValidation", cors(corsOptions), function(request, response) {
-	var promoCode = request.body.promoCode;
-	if (promoCode) {
-		console.log("got code: " + promoCode);
-	} else {
-		console.log("no code");
-	}
-	
-	if (promoCode == freeCode) {
-		response.send('free');
-	} else if (promoCode == cheapCode) {
-		response.send('cheap');
-	} else {
-		response.send('none');
-	}
 });
 
 app.post("/", cors(corsOptions), function(request, response) {
@@ -55,7 +38,23 @@ app.post("/", cors(corsOptions), function(request, response) {
 	var subscription = request.body.subscription;
 	var email = request.body.email;
 	var promoCode = request.body.promoCode;
+	var validation = request.body.validation;
 	console.log(request.body);
+	if (validation) {
+		if (promoCode) {
+		console.log("got code: " + promoCode);
+		} else {
+			console.log("no code");
+		}
+		
+		if (promoCode == freeCode) {
+			response.send('free');
+		} else if (promoCode == cheapCode) {
+			response.send('cheap');
+		} else {
+			response.send('none');
+		}
+	}
 
 	if (tokenId) {
 
