@@ -30,7 +30,7 @@ app.get("/", function(request, response) {
 })
 
 app.post("/codeValidation", cors(corsOptions), function(request, response) {
-	var promoCode = request.body.promoCode;
+	var promoCode = request.body;
 	if (promoCode) {
 		console.log("got code: " + promoCode);
 	} else {
