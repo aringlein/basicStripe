@@ -21,7 +21,7 @@ Parse.initialize("K1LHReBWbmi9HeesHsU1fGLviYgmFNur0YNzBTjJ","Kf6nyUpJbInyNv6Hvvl
 const freeCode = "83920911";
 const cheapCode = "23981928";
 const cheapCoupon = "professorCheap";
-const freeCoupon = "professorCheap";
+const freeCoupon = "professorFree";
 
 //gorgeous doc stuff, remove later
 app.use(express.static(__dirname+ '/public'));
