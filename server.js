@@ -18,8 +18,8 @@ var Parse = require("parse/node");
 Parse.initialize("K1LHReBWbmi9HeesHsU1fGLviYgmFNur0YNzBTjJ","Kf6nyUpJbInyNv6HvvlkxBqGQx58qBG148oebkt7");
 
 //promo code setup
-const freeCode = "free";
-const cheapCode = "cheap";
+const freeCode = "83920911";
+const cheapCode = "23981928";
 const cheapCoupon = "professorCheap";
 const freeCoupon = "professorCheap";
 
@@ -28,6 +28,17 @@ app.use(express.static(__dirname+ '/public'));
 app.get("/", function(request, response) {
 	response.sendFile(__dirname + '/index.html');
 })
+
+app.post("/codeValidation", cors(corsOptions), function(request, response) {
+	var promoCode = request.body.promoCode;
+	if (promoCode == freeCode) {
+		response.send('free');
+	} else if (promoCode == cheapCode) {
+		response.send('cheap');
+	} else {
+		response.send('none');
+	}
+} 
 
 app.post("/", cors(corsOptions), function(request, response) {
 
