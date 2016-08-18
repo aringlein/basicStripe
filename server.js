@@ -20,6 +20,8 @@ Parse.initialize("K1LHReBWbmi9HeesHsU1fGLviYgmFNur0YNzBTjJ","Kf6nyUpJbInyNv6Hvvl
 //promo code setup
 const freeCode = "free";
 const cheapCode = "cheap";
+const cheapCoupon = "professorCheap";
+const freeCoupon = "professorCheap";
 
 //gorgeous doc stuff, remove later
 app.use(express.static(__dirname+ '/public'));
@@ -51,14 +53,14 @@ app.post("/", cors(corsOptions), function(request, response) {
 				if (promoCode == freeCode) {
 					coupon = freeCoupon;
 				} else if (promoCode == cheapCode) {
-					coupon = cheapCode;
+					coupon = cheapCoupon;
 				} else {
 					coupon = undefined;
 				}
 			} else {
 				coupon = undefined;
 			}
-			
+
 			stripe.customers.create({
 				source: tokenId,
 				email: email,
