@@ -83,7 +83,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 			stripe.customers.create({
 				source: tokenId,
 				email: email,
-				plan: "planMonthlyCheap",
+				plan: "planMonthly",
 				description: userId,
 				coupon: coupon
 			}, function(err, customer) {
