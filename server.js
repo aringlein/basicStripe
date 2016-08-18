@@ -13,10 +13,13 @@ bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 var stripe = require("stripe")("sk_live_VDCRR9PPUZfzPTnXaCp7XfbN");
-
 var Parse = require("parse/node");
 
 Parse.initialize("K1LHReBWbmi9HeesHsU1fGLviYgmFNur0YNzBTjJ","Kf6nyUpJbInyNv6HvvlkxBqGQx58qBG148oebkt7");
+
+//promo code setup
+const freeCode = "free";
+const cheapCode = "cheap";
 
 //gorgeous doc stuff, remove later
 app.use(express.static(__dirname+ '/public'));
@@ -34,6 +37,7 @@ app.post("/", cors(corsOptions), function(request, response) {
 	var userId = request.body.userId;
 	var subscription = request.body.subscription;
 	var email = request.body.email;
+	var promoCode = request.body.promoCode;
 	console.log(request.body);
 
 	if (tokenId) {
@@ -41,11 +45,26 @@ app.post("/", cors(corsOptions), function(request, response) {
 		console.log("got a token");
 
 		if (subscription) {
-				stripe.customers.create({
+
+			var coupon;
+			if (promoCode) {
+				if (promoCode == freeCode) {
+					coupon = freeCoupon;
+				} else if (promoCode == cheapCode) {
+					coupon = cheapCode;
+				} else {
+					coupon = undefined;
+				}
+			} else {
+				coupon = undefined;
+			}
+			
+			stripe.customers.create({
 				source: tokenId,
 				email: email,
 				plan: "planMonthly",
-				description: userId
+				description: userId,
+				coupon: coupon
 			}, function(err, customer) {
 				if (customer) {
 
