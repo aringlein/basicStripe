@@ -29,8 +29,8 @@ app.get("/", function(request, response) {
 	response.sendFile(__dirname + '/index.html');
 })
 
-app.post("/codeValidation", cors(corsOptions), function(request, response) {
-	var promoCode = request.body;
+app.get("/codeValidation", cors(corsOptions), function(request, response) {
+	var promoCode = request.params.promoCode;
 	if (promoCode) {
 		console.log("got code: " + promoCode);
 	} else {
