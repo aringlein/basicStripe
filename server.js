@@ -38,11 +38,9 @@ app.post("/codeValidation", cors(corsOptions), function(request, response) {
 	} else {
 		response.send('none');
 	}
-} 
+});
 
 app.post("/", cors(corsOptions), function(request, response) {
-
-	
 
 	console.log("got a request");
 
