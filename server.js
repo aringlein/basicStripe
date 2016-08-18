@@ -31,6 +31,12 @@ app.get("/", function(request, response) {
 
 app.post("/codeValidation", cors(corsOptions), function(request, response) {
 	var promoCode = request.body.promoCode;
+	if (promoCode) {
+		console.log("got code: " + promoCode);
+	} else {
+		console.log("no code");
+	}
+	
 	if (promoCode == freeCode) {
 		response.send('free');
 	} else if (promoCode == cheapCode) {
