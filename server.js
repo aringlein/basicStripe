@@ -51,13 +51,17 @@ app.post("/", cors(corsOptions), function(request, response) {
 			var coupon;
 			if (promoCode) {
 				if (promoCode == freeCode) {
+					console.log("choosing free");
 					coupon = freeCoupon;
 				} else if (promoCode == cheapCode) {
+					console.log("choosing cheap");
 					coupon = cheapCoupon;
 				} else {
+					console.log("choosing bad coupon");
 					coupon = undefined;
 				}
 			} else {
+				console.log("choosing no coupon");
 				coupon = undefined;
 			}
 
