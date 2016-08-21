@@ -23,7 +23,7 @@ const cheapCode = "23981928";
 const cheapCoupon = "professorCheap";
 const freeCoupon = "professorFree";
 
-//gorgeous doc stuff, remove later
+
 app.use(express.static(__dirname+ '/public'));
 app.get("/", function(request, response) {
 	response.sendFile(__dirname + '/index.html');
