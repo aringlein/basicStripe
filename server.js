@@ -229,7 +229,7 @@ var createError = function(message, user, group) {
 var nodemailer = require('nodemailer');
 
 // create reusable transporter object using the default SMTP transport
-var transporter = nodemailer.createTransport('smtps://alex.ringlein@gmail.com:nintendolchs14@smtp.gmail.com');
+var transporter = nodemailer.createTransport('smtps://gorgeousdoc3@gmail.com:gdgdgdgd@smtp.gmail.com');
 
 
 app.post("/mail", function(request, response) {
@@ -256,7 +256,7 @@ app.post("/mail", function(request, response) {
 		// setup e-mail data with unicode symbols
 		var mailOptions = {
 		    from: '"Alex Ringlein" <alex.ringlein@gmail.com>', // sender address
-		    to: 'nicholas.andris@gmail.com', // list of receivers
+		    to: 'alexander.ringlein@yale.edu', // list of receivers
 		    subject: 'Gorgeous Doc Submission', // Subject line
 		    text: emailBody, // plaintext body
 		};
