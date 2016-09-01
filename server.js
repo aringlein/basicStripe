@@ -256,7 +256,7 @@ app.post("/mail", function(request, response) {
 		// setup e-mail data with unicode symbols
 		var mailOptions = {
 		    from: '"Alex Ringlein" <alex.ringlein@gmail.com>', // sender address
-		    to: 'alexander.ringlein@yale.edu', // list of receivers
+		    to: 'nicholas.andris@gmail.com', // list of receivers
 		    subject: 'Gorgeous Doc Submission', // Subject line
 		    text: emailBody, // plaintext body
 		};
