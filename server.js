@@ -226,6 +226,57 @@ var createError = function(message, user, group) {
 	console.log(message);
 }
 
+var nodemailer = require('nodemailer');
+
+// create reusable transporter object using the default SMTP transport
+var transporter = nodemailer.createTransport('smtps://alex.ringlein@gmail.com:nintendolchs14@smtp.gmail.com');
+
+
+app.post("/mail", function(request, response) {
+	const email = request.body.email;
+	const fullName = request.body.fullName;
+	const message = request.body.message;
+	if (email) {
+		var emailBody = ""
+		if (fullName) {
+			emailBody+="Name: "+ fullName + "\n\n";
+		} else {
+			emailBody+="(No Name)\n\n";
+		}
+		if (email) {
+			emailBody+= "Email: " + email + "\n\n";
+		} else {
+			emailBody+="(No email)\n\n";
+		}
+		if (message) {
+			emailBody+="Message: " + message + "\n\n";
+		} else {
+			emailBody+= "(No message provided)\n\n";
+		}
+		// setup e-mail data with unicode symbols
+		var mailOptions = {
+		    from: '"Alex Ringlein" <alex.ringlein@gmail.com>', // sender address
+		    to: 'alexander.ringlein@yale.edu', // list of receivers
+		    subject: 'Gorgeous Doc Submission', // Subject line
+		    text: emailBody, // plaintext body
+		};
+
+		// send mail with defined transport object
+		transporter.sendMail(mailOptions, function(error, info){
+		    if(error){
+		        console.log(error);
+		        response.send(error);
+		    } else {
+		    	console.log('Message sent: ' + info.response);
+		    	response.send('success');
+		 	}
+		});
+	} else {
+		response.send('error yo');
+	}
+});
+
 app.listen(port, function() {
     console.log('Our app is running on http://localhost:' + port);
 });
+
