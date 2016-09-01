@@ -75,7 +75,7 @@
 	                    		console.log("got email: "+ email);
 		                    	if (email && fname && lname && message) {
 		                    		$.ajax({
-					                  	url: 'http://localhost:8080/mail',
+					                  	url: 'www.gorgeousdoc.com/mail',
 					                  	type: 'post',
 					                    data: {email: email, fullName: name, message: message},
 					                    success: function(data) {
