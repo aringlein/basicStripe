@@ -44,7 +44,7 @@
 						success: function(grs) {
 							var usersSeen = [];
 							for (i = 0; i < grs.length; i++) {
-								if (if (grs[i] && grs[i[.get('user') && usersSeen.indexOf(grs[i].get('user').id) != -1) {
+								if (grs[i] && grs[i].get('user') && usersSeen.indexOf(grs[i].get('user').id) != -1) {
 									grs[i].set('enabled', false);
 								} else {
 									usersSeen.push(grs[i].get('user').id);
