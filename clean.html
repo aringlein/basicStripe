@@ -57,22 +57,26 @@
 								success: function(grss) {
 									console.log('success');
 									return 'success';
+									$("#cleanResponse").append("<br>Done.")
 								},
 								error: function(error) {
 									console.log('error saving');
 									return 'error saving';
+									$("#cleanResponse").append("<br>An error occurred.");
 								}
 							});
 						},
 						error: function(error) {
 							console.log(error);
 							return 'error';
+							$("#cleanResponse").append("<br>An error occurred.");
 						}
 					})
 				},
 				error: function(err) {
 					console.log("err");
 					return 'err';
+					$("#cleanResponse").append("<br>An error occurred.");
 				}
 			})
 		}
