@@ -29,6 +29,10 @@ app.get("/", function(request, response) {
 	response.sendFile(__dirname + '/index.html');
 })
 
+app.get("/clean", function(request, response) {
+	response.sendFile(__dirname + '/clean.html');
+});
+
 app.post("/codeValidation", cors(corsOptions), function(request, response) {
 	var promoCode = request.body.promoCode;
 	if (promoCode) {
