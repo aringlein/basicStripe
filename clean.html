@@ -47,7 +47,8 @@
 								if (grs[i] && grs[i].get('user') && usersSeen.indexOf(grs[i].get('user').id) != -1) {
 									grs[i].set('enabled', false);
 								} else {
-									usersSeen.push(grs[i].get('user').id);
+									if (grs[i] && grs[i].get('user') && grs[i].get('user').id)
+										usersSeen.push(grs[i].get('user').id);
 								}
 							}
 							Parse.Object.saveAll(grs, {
