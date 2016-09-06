@@ -46,6 +46,8 @@
 							for (i = 0; i < grs.length; i++) {
 								if (grs[i] && grs[i].get('user') && usersSeen.indexOf(grs[i].get('user').id) != -1) {
 									grs[i].set('enabled', false);
+									$("#cleanResponse").append("<br>Removed duplicate entry for userID: "+ grs[i].get('user').id + " Name: "+ grs[i].get('user').get('name'));
+
 								} else {
 									if (grs[i] && grs[i].get('user') && grs[i].get('user').id)
 										usersSeen.push(grs[i].get('user').id);
@@ -77,7 +79,7 @@
 		$("#cleanButton").on('click', function(evt) {
 			evt.preventDefault();
 			//function from parse.js
-			$("#cleanResponse").html(cleanGroup($("#cleanId").val()));
+			cleanGroup($("#cleanId").val());
 		});
 	</script>
 </body>
