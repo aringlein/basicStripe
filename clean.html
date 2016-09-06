@@ -53,19 +53,23 @@
 							Parse.Object.saveAll(grs, {
 								success: function(grss) {
 									console.log('success');
+									return 'success';
 								},
 								error: function(error) {
 									console.log('error saving');
+									return 'error saving';
 								}
 							}
 						},
 						error: function(error) {
 							console.log(error);
+							return 'error';
 						}
 					})
 				},
 				error: function(err) {
 					console.log("err");
+					return 'err';
 				}
 			})
 		}
