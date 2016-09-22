@@ -22,6 +22,8 @@ const freeCode = "83920911";
 const cheapCode = "23981928";
 const cheapCoupon = "professorCheap";
 const freeCoupon = "professorFree";
+const tryCode = "TRYOVOTE";
+const tryCoupon = "TRYOVOTE"
 
 //gorgeous doc stuff, remove later
 app.use(express.static(__dirname+ '/public'));
@@ -45,6 +47,8 @@ app.post("/codeValidation", cors(corsOptions), function(request, response) {
 		response.send('free');
 	} else if (promoCode == cheapCode) {
 		response.send('cheap');
+	} else if (promoCode == tryCode) {
+		response.send('try');
 	} else {
 		response.send('none');
 	}
@@ -75,6 +79,10 @@ app.post("/", cors(corsOptions), function(request, response) {
 				} else if (promoCode == cheapCode) {
 					console.log("choosing cheap");
 					coupon = cheapCoupon;
+
+				} else if (promoCode == tryCode) {
+					console.log("choosing try");
+					coupon = tryCoupon;
 				} else {
 					console.log("choosing bad coupon");
 					coupon = undefined;
